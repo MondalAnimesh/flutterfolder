@@ -41,8 +41,32 @@ class _LoginState extends State<Login> {
                     SizedBox(
                       width: 90,
                       child: FloatingActionButton.extended(
-                        onPressed: () {
+                        onPressed: () async {
                           print("object");
+                          var x = await showDialog<String>(
+                            context: context,
+                            builder: (BuildContext context) => AlertDialog(
+                              title: const Text('login'),
+                              content: const Text('do you want to login'),
+                              actions: <Widget>[
+                                TextButton(
+                                  onPressed: () =>
+                                      Navigator.pop(context, "false"),
+                                  child: const Text('no'),
+                                ),
+                                TextButton(
+                                  onPressed: () =>
+                                      Navigator.pop(context, "true"),
+                                  child: const Text('yes'),
+                                ),
+                              ],
+                            ),
+                          );
+                          print("///////////////0");
+                          //  print(x == "true");
+                          if (x == "true") {
+                            Navigator.pushNamed(context, "LikePage");
+                          }
                         },
                         label: const Text("login"),
                         backgroundColor: Colors.orange,
